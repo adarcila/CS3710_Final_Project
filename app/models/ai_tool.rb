@@ -1,0 +1,2 @@
+class AiTool < ApplicationRecord
+end
