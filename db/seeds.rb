@@ -44,6 +44,18 @@ Student.destroy_all
     skills: Faker::Lorem.words(number: 5).join(", ")
   )
 
+  #Creating AiTools for people to search
+  AiTool.create!(
+  name: "MidJourney",
+  description: "AI-powered image generation tool",
+  features: "art, creativity, photo realism"
+)
+
+AiTool.create!(
+  name: "ChatGPT",
+  description: "Conversational AI for natural language processing",
+  features: "language, conversation, AI assistant"
+)
 
    # Generate a unique profile pic based on the student's name
   profile_picture_url = "https://robohash.org/#{student.first_name.gsub(' ', '')}"
