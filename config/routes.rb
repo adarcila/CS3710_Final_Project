@@ -1,22 +1,25 @@
+# config/routes.rb
 Rails.application.routes.draw do
-  resources :portfolios
+  #resources :portfolios
   devise_for :students, controllers: { 
-  registrations: 'students/registrations',
-  sessions: 'students/sessions',
-  passwords: 'students/passwords' 
-}
-  
-  # Necessary Student routes and  portfolio routes
-  resources :students, only: [:index, :show, :edit, :update, :destroy] do
-    resource :portfolio, only: [:show, :edit, :update]  # Nesting portfolio under student
-  end
+   # registrations: 'students/registrations',
+    #sessions: 'students/sessions',
+    #passwords: 'students/passwords' 
+  }
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  #resources :students, only: [:index, :show, :edit, :update, :destroy] do
+   # resource :portfolio, only: [:show, :edit, :update]
+ # end
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # Explicit route for home page
+  get 'home', to: 'home#index', as: :home
 
-  # Defines the root path route ("/")
-  root "students#index"
+  # Correct root path definition
+  #root to: 'home#index'
+
+  root 'home#index'
+
+  resources :ai_tools
+
+ # get "up" => "rails/health#show", as: :rails_health_check
 end
