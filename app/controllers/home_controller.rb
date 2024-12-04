@@ -27,7 +27,7 @@ class HomeController < ApplicationController
       # Execute the search
       @ai_tools = AiTool.where(query, *query_params).distinct
     else
-      @ai_tools = []
+      @ai_tools = AiTool.all # You can also populate with all tools if no search query is provided
     end
   end
 end
