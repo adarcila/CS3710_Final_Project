@@ -1,20 +1,22 @@
 <h1>Search AI Tools</h1>
 
-<%= search_form_for @q, url: root_path, method: :get do |f| %>
+<%= form_with url: root_path, method: :get, local: true do |form| %>
   <div class="mb-3">
-    <%= f.label :name_cont, "Search by Tool Name" %>
-    <%= f.search_field :name_cont, class: "form-control" %>
+    <%= form.label :q, "Search by Tool Name or Features" %>
+    <%= form.search_field :q, class: "form-control", placeholder: "Type here to search..." %>
   </div>
-  <div class="mb-3">
-    <%= f.label :features_cont, "Search by Features" %>
-    <%= f.search_field :features_cont, class: "form-control" %>
-  </div>
-  <%= f.submit "Search", class: "btn btn-primary" %>
+  <%= form.submit "Search", class: "btn btn-primary" %>
 <% end %>
 
-<h2>Results</h2>
-<ul>
-  <% @ai_tools.each do |tool| %>
-    <li><strong><%= tool.name %></strong>: <%= tool.description %> (<%= tool.features %>)</li>
+<% if @ai_tools.any? %>  <!-- Only display results if there are any -->
+  <h2>Results</h2>
+  <ul>
+    <% @ai_tools.each do |tool| %>
+      <li><strong><%= tool.name %></strong>: <%= tool.description %> (<%= tool.features %>)</li>
+    <% end %>
+  </ul>
+<% else %>
+  <% if params[:q].present? %>
+    <p>No results found.</p>
   <% end %>
-</ul>
+<% end %>

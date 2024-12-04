@@ -45,13 +45,13 @@ Student.destroy_all
   )
 
   #Creating AiTools for people to search
-  AiTool.create!(
+  AiTool.find_or_create_by!(
   name: "MidJourney",
   description: "AI-powered image generation tool",
-  features: "art, creativity, photo realism"
+  features: "art, creativity, photo realism, images"
 )
 
-AiTool.create!(
+AiTool.find_or_create_by!(
   name: "ChatGPT",
   description: "Conversational AI for natural language processing",
   features: "language, conversation, AI assistant"

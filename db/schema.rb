@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_24_044711) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_04_175138) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_24_044711) do
     t.datetime "updated_at", null: false
     t.text "features"
   end
+
+# Could not dump table "ai_tools_temp" because of following StandardError
+#   Unknown type 'NUM' for column 'created_at'
 
   create_table "portfolios", force: :cascade do |t|
     t.string "preferred_email"
