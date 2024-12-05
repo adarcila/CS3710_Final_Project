@@ -1,8 +1,15 @@
 <h1><%= @ai_tool.name %></h1>
 <p><%= @ai_tool.description %></p>
 <p>Features: <%= @ai_tool.features %></p>
+
 <% if @ai_tool.website_url.present? %>
   <p>Official Website: <%= link_to "Visit Official Website", @ai_tool.website_url %></p>
 <% else %>
   <p>No official website available.</p>
+<% end %>
+
+<% if @ai_tool.logo_url.present? %>
+  <p><%= image_tag @ai_tool.logo_url, alt: @ai_tool.name, style: "max-width: 200px;" %></p>
+<% else %>
+  <p>No logo available for this tool.</p>
 <% end %>
