@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_04_205630) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_05_161004) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_04_205630) do
 # Could not dump table "ai_tools_temp" because of following StandardError
 #   Unknown type 'NUM' for column 'created_at'
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "ai_tool_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ai_tool_id"], name: "index_favorites_on_ai_tool_id"
+    t.index ["student_id"], name: "index_favorites_on_student_id"
+  end
+
   create_table "portfolios", force: :cascade do |t|
     t.string "preferred_email"
     t.boolean "active"
@@ -83,5 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_04_205630) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "ai_tools"
+  add_foreign_key "favorites", "students"
   add_foreign_key "portfolios", "students", on_delete: :cascade
 end

@@ -3,7 +3,7 @@
 <p>Features: <%= @ai_tool.features %></p>
 
 <% if @ai_tool.website_url.present? %>
-  <p>Official Website: <%= link_to "Visit Official Website", @ai_tool.website_url %></p>
+  <p>Official Website: <%= link_to "Visit Official Website", @ai_tool.website_url, target: "_blank", rel: "noopener" %></p>
 <% else %>
   <p>No official website available.</p>
 <% end %>
@@ -12,4 +12,16 @@
   <p><%= image_tag @ai_tool.logo_url, alt: @ai_tool.name, style: "max-width: 200px;" %></p>
 <% else %>
   <p>No logo available for this tool.</p>
+<% end %>
+
+<hr>
+
+<% if student_signed_in? %>
+  <% if current_student.favorite_ai_tools.exists?(@ai_tool.id) %>
+    <%= button_to "Unfavorite", unfavorite_ai_tool_path(@ai_tool), method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <%= button_to "Favorite", favorite_ai_tool_path(@ai_tool), method: :post, class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <p><%= link_to "Sign in to favorite this tool", new_student_session_path %></p>
 <% end %>
