@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_05_161004) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_12_053839) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_05_161004) do
     t.index ["student_id"], name: "index_portfolios_on_student_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "ai_tool_id", null: false
+    t.integer "student_id", null: false
+    t.integer "stars"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ai_tool_id"], name: "index_ratings_on_ai_tool_id"
+    t.index ["student_id"], name: "index_ratings_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -95,4 +105,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_05_161004) do
   add_foreign_key "favorites", "ai_tools"
   add_foreign_key "favorites", "students"
   add_foreign_key "portfolios", "students", on_delete: :cascade
+  add_foreign_key "ratings", "ai_tools"
+  add_foreign_key "ratings", "students"
 end
